@@ -27,7 +27,7 @@
     }
 
     </style>
-    <iron-image id="image" class="image" width="[[auto]]" width="[[auto]]" sizing="[[sizing]]" src="[[src]]" fade=[[fade]]></iron-image>
+    <iron-image id="image" class="image" width="[[width]]" height="[[height]]" sizing="[[sizing]]" src="[[src]]" fade=[[fade]]></iron-image>
   </template>
 
   <script>
@@ -75,6 +75,8 @@
 
       _observeSizing(sizing,width,height){
           console.dir(Polymer.dom(this.$.image).node.querySelector('img'));
+          this.height = Polymer.dom(this.$.image).node.querySelector('img').naturalHeight;
+          this.width = Polymer.dom(this.$.image).node.querySelector('img').naturalWidth;
       }
       // Define other lifecycle methods as you need.
       ready() {
