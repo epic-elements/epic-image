@@ -1,0 +1,80 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-image/iron-image.html">
+
+<dom-module id="epic-image">
+  <template>
+    <style>
+    :host {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 100%;
+        background-color: transparent;
+    }
+    figure {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    :host[circular] {
+        overflow: hidden;
+    }
+    :host[circular],
+    :host[circular] iron-image {
+        border-radius: 50%;
+    }
+
+    </style>
+
+    <a id="link" href="[[href]]">
+    <figure>
+      <iron-image class="image" height="[[height]]" width="[[width]]" sizing="[[sizing]]" src="[[src]]"></iron-image>
+    </figure>
+  </a>
+  </template>
+
+  <script>
+  (function() {
+    'use strict';
+    class EpicImage {
+      beforeRegister() {
+        this.is = 'epic-image';
+        this.properties = {
+            height:{
+                type:Number,
+                notify: true,
+                value:480
+            },
+            sizing:{
+                type:Number,
+                notify: true,
+                value:480
+            },
+            width:{
+                type:Number,
+                notify: true,
+                value:480
+            },
+            href: {
+              type: String,
+          },
+          src: {
+            type: String
+          }
+        };
+        this.observers = [];
+      }
+      // Define other lifecycle methods as you need.
+      ready() {  }
+      attached() {  }
+      detached() {  }
+      attributeChanged() {  }
+    }
+    // Register the element using Polymer's constructor.
+    Polymer(EpicImage);
+    })();
+  </script>
+</dom-module>
