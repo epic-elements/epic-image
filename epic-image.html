@@ -12,13 +12,12 @@
         display: inline-block;
         vertical-align: middle;
         max-width: 100%;
+        /*width: 100%;*/
+        height: auto;
+        overflow: hidden;
         background-color: transparent;
     }
-    figure {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+
     :host[circular] {
         overflow: hidden;
     }
@@ -28,12 +27,7 @@
     }
 
     </style>
-
-    <a id="link" href="[[href]]">
-    <figure>
-      <iron-image class="image" height="[[height]]" width="[[width]]" sizing="[[sizing]]" src="[[src]]"></iron-image>
-    </figure>
-  </a>
+    <iron-image id="image" class="image" width="[[auto]]" width="[[auto]]" sizing="[[sizing]]" src="[[src]]" fade=[[fade]]></iron-image>
   </template>
 
   <script>
@@ -44,17 +38,21 @@
         this.is = 'epic-image';
         this.properties = {
             height:{
-                type:Number,
-                notify: true
-            },
-            sizing:{
-                type:Number,
+                type:String,
                 notify: true,
-                value:'cover'
+                value: 'auto',
+                // observer: '_heightChanged'
             },
             width:{
-                type:Number,
-                notify: true
+                type:String,
+                notify: true,
+                value: 'auto',
+                // observer: '_widthChanged'
+            },
+            sizing:{
+                type:String,
+                notify: true,
+                // value: 'cover'
             },
             href: {
               type: String,
@@ -63,13 +61,29 @@
           src: {
             type: String,
             notify:true
+          },
+          fade: {
+            type: Boolean,
+            notify:true,
+            value: true
           }
         };
-        this.observers = [];
+        this.observers = [
+            '_observeSizing(sizing,width,height)'
+        ];
+      }
+
+      _observeSizing(sizing,width,height){
+          console.dir(Polymer.dom(this.$.image).node.querySelector('img'));
       }
       // Define other lifecycle methods as you need.
-      ready() {  }
-      attached() {  }
+      ready() {
+
+      }
+      attached() {
+
+
+  }
       detached() {  }
       attributeChanged() {  }
     }
